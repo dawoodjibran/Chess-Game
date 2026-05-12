@@ -33,4 +33,22 @@ class ChessPiece
         virtual bool isValidMove(int startRow, int startCol, int endRow, int endCol, ChessPiece* grid[8][8]) const = 0;
 };
 
+
+class Pawn : public ChessPiece 
+{
+    public:
+        Pawn(TeamColor color);
+    
+        bool isValidMove(int startRow, int startCol, int endRow, int endCol, ChessPiece* grid[8][8]) const override;
+};
+
+
+class Rook : public ChessPiece 
+{
+    public:
+        Rook(TeamColor color);
+    
+        bool isValidMove(int startRow, int startCol, int endRow, int endCol, ChessPiece* grid[8][8]) const override;
+};
+
 #endif
