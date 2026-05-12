@@ -111,3 +111,76 @@ bool Knight::isValidMove(int startRow, int startCol, int endRow, int endCol, Che
 }
 
 
+Bishop::Bishop(TeamColor color) : ChessPiece(color, (color == WHITE) ? 'B' : 'b') {}
+
+bool Bishop::isValidMove(int startRow, int startCol, int endRow, int endCol, ChessPiece* grid[8][8]) const 
+{
+    if (absoluteValue(endRow - startRow) != absoluteValue(endCol - startCol)) 
+    {
+        return false;
+    }
+    
+    int rowDir = (endRow == startRow) ? 0 : (endRow > startRow ? 1 : -1);
+    int colDir = (endCol == startCol) ? 0 : (endCol > startCol ? 1 : -1);
+    
+    int currR = startRow + rowDir;
+    int currC = startCol + colDir;
+    
+    while (currR != endRow && currC != endCol) 
+    {
+        if (grid[currR][currC] != nullptr) 
+        {
+            return false;
+        }
+
+        currR += rowDir;
+        currC += colDir;
+    }
+
+    if((grid[endRow][endCol] == nullptr) || (grid[endRow][endCol]->getTeam() != team)) 
+    {
+        return true;
+    }
+
+    return false;
+}
+
+
+Queen::Queen(TeamColor color) : ChessPiece(color, (color == WHITE) ? 'Q' : 'q') {}
+
+bool Queen::isValidMove(int startRow, int startCol, int endRow, int endCol, ChessPiece* grid[8][8]) const 
+{
+    Rook tempRook(team);
+    
+    if (tempRook.isValidMove(startRow, startCol, endRow, endCol, grid)) 
+    {
+        return true;
+    }
+
+    Bishop tempBishop(team);
+    if (tempBishop.isValidMove(startRow, startCol, endRow, endCol, grid)) 
+    {
+        return true;
+    }
+
+    return false;
+}
+
+
+King::King(TeamColor color) : ChessPiece(color, (color == WHITE) ? 'K' : 'k') {}
+
+bool King::isValidMove(int startRow, int startCol, int endRow, int endCol, ChessPiece* grid[8][8]) const 
+{
+   int rDiff = absoluteValue(endRow - startRow);
+   int cDiff = absoluteValue(endCol - startCol);
+
+   if ((rDiff <= 1) && (cDiff <= 1)) 
+   {
+       if((grid[endRow][endCol] == nullptr) || (grid[endRow][endCol]->getTeam() != team)) 
+       {
+           return true;
+       }
+   }
+
+    return false;
+}
