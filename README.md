@@ -33,6 +33,8 @@ This project serves as a comprehensive case study for the four pillars of OOP:
 ├── ChessGame.h       # Header File containing all the class definitions
 ├── ChessGame.cpp     # Implementation of Header File
 ├── main.cpp          # Main File
+├── ChessGame.exe     # Program File
+├── Report.pdf        # Project Report
 ├── README.md         # Project documentation and guide
 └── .gitignore        # Standard C++ ignore file
 ```
