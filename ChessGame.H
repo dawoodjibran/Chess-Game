@@ -85,4 +85,33 @@ class King : public ChessPiece
         bool isValidMove(int startRow, int startCol, int endRow, int endCol, ChessPiece* grid[8][8]) const override;
 };
 
+
+class ChessBoard 
+{
+    private:
+        ChessPiece* grid[8][8];
+
+    public:
+        ChessBoard();
+    
+        ~ChessBoard();
+    
+        void initializePieces();
+        void display();
+        bool movePiece(int sRow, int sCol, int eRow, int eCol, TeamColor playerTurn);
+};
+
+
+class ChessEngine 
+{
+    private:
+        ChessBoard board;
+        TeamColor activeTurn;
+
+    public:
+        ChessEngine();
+        void play();
+};
+
+
 #endif
